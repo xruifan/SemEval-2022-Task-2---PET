@@ -1,0 +1,13 @@
+*.pickle
+.idea
+*.iml
+*.pyc
+*.ipynb
+.ipynb_checkpoints
+.pytest_cache
+glue_data/*
+out/*
+venv/*
+*.bin
+semeval_data/*
+semeval/*
