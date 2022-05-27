@@ -650,6 +650,16 @@ class MyTaskPVP(PVP):
         "0": ["not"]
     }
 
+    VERBALIZER_P5 = {
+        "1": ["Não"],
+        "0": ["Sim"]
+    }
+
+    VERBALIZER_P6 = {
+        "1": ["Non"],
+        "0": ["Si"]
+    }
+
     def get_parts(self, example: InputExample):
         """
         This function defines the actual patterns: It takes as input an example and outputs the result of applying a
@@ -685,7 +695,11 @@ class MyTaskPVP(PVP):
         elif self.pattern_id == 4:
             # this corresponds to the pattern a. mwe is [MASK] <second word of idiom>
             return [text_a, '. ', mwe, ' is ', self.mask, mwe_second_word], []
-        
+
+        elif self.pattern_id == 5 or self.pattern_id == 6: 
+            # this corresponds to the pattern [MASK], mwe é literal. 
+            return [text_a, '. ', self.mask, ', ', mwe, ' é literal'], []
+            
         else:
             raise ValueError("No pattern implemented for id {}".format(self.pattern_id))
 
@@ -695,7 +709,11 @@ class MyTaskPVP(PVP):
         elif self.pattern_id == 3:
             return MyTaskPVP.VERBALIZER_P3[label]
         elif self.pattern_id == 4:
-            return MyTaskPVP.VERBALIZER_P3[label]
+            return MyTaskPVP.VERBALIZER_P4[label]
+        elif self.pattern_id == 5:
+            return MyTaskPVP.VERBALIZER_P5[label]
+        elif self.pattern_id == 6:
+            return MyTaskPVP.VERBALIZER_P6[label]
         else: 
             return MyTaskPVP.VERBALIZER[label]
         
